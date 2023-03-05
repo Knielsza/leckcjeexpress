@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lekcja 2</title>
+    <script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <style>
+        .klasa1 {
+            color: red;
+        }
+
+        .klasa2 {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="react-app"></div>
+    <script>
+        var h1 = React.createElement("h1", { className: "klasa1" }, "React component h1")
+        var h2 = React.createElement("h2", { className: "klasa2" }, "React component h2")
+
+        var tab = [h1, h2, h1, h2, h1, h2]
+
+        ReactDOM.render(
+            React.createElement("div", {}, tab),
+            document.getElementById('react-app')
+        )
+    </script>
+</body>
+
+</html>

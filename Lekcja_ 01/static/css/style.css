@@ -1,0 +1,24 @@
+#p1 {
+    color: coral;
+}
+#p2 {
+    color: rgb(55, 93, 94);
+}
+#p3 {
+    color: rgb(124, 31, 31);
+}
+#img1 {
+    background-image: url(../gfx/img1.png);
+    width: 591px;
+    height: 591px;
+}
+#img2 {
+    background-image: url(../gfx/img2.png);
+    width: 641px;
+    height: 635px;
+}
+#img3 {
+    background-image: url(../gfx/img3.png);
+    width: 640px;
+    height: 518px;
+}

@@ -1,0 +1,8 @@
+<form action="/handleForm" method="POST">
+    <select name="opcja" size="3">
+        {{#each fields}}
+            <option value="{{name}}">{{name}}</option>
+        {{/each}}
+    </select>
+    <input type="submit">
+</form>

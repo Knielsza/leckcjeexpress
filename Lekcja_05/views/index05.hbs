@@ -1,0 +1,7 @@
+<form action="/handleForm" method="POST">
+        {{#each fields}}
+            <input type="radio" id="{{name}}" name="opcja" value="{{name}}">
+            <label for="{{name}}">{{name}}</label>
+        {{/each}}
+    <input type="submit">
+</form>

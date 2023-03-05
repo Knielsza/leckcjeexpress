@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+    </style>
+    <title>Lekcja 4</title>
+</head>
+
+<body>
+    <form enctype="multipart/form-data" method="POST" action="/handleUpload">
+
+        <label for="date">data:</label>
+        <input type="date" name="date" id="date">
+
+        <label for="nazwa">nazwa:</label>
+        <input type="text" name="nazwa" id="nazwa">
+
+        <label for="zdj">zdjęcie:</label>
+        <input type="file" multiple required accept="image/*" name="imageupload" id="fileInput">
+        <input type="button" onclick="fecz()" value="Wyślij">
+    </form>
+    <pre id="formData"></pre>
+    <script>
+        function fecz(){
+            const fd = new FormData()
+
+            fd.append("file", document.getElementById("fileInput").files[0]) // pierwszy plik z inputa
+
+            const body = fd
+
+            const headers = { "Content-Type": "application/json" }
+
+            fetch("/handleUpload", { method: "post", body })
+                .then(response => response.json())
+                .then(data => document.getElementById("formData").innerHTML = JSON.stringify(data, null, 4)) // odesłane z serwera dane
+                .catch(error => console.log(error)) // ew błąd
+        }
+    </script>
+</body>
+
+</html>

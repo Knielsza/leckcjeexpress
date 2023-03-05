@@ -1,0 +1,14 @@
+form {
+    width: fit-content;
+    height: fit-content;
+    background-color: wheat;
+    border: 2px solid black;
+    text-align: center;
+}
+td {
+    text-align: left;
+    padding: 2px;
+}
+tr {
+    padding: 5px;
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lekcja 3</title>
+    <style>
+        #makeTable {
+            width: 150px;
+            height: 35px;
+            font-size: 25px;
+            color: white;
+            background-color: blue;
+            border: 2px solid black;
+            text-align: center;
+            cursor: pointer;
+            margin: 5px;
+            padding: 3px;
+        }
+
+        #menu {
+            display: flex;
+        }
+
+        .kwadrat {
+            width: 100px;
+            height: 100px;
+            background-color: black;
+            cursor: pointer;
+            margin: 5px;
+            display: flex;
+            float: left;
+        }
+
+        #container {
+            /*display: flex;*/
+            width: fit-content;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="color: blue; text-decoration: underline;">06: fetch, range, change color in response</h1>
+
+    <form action="/handleForm" method="POST">
+        <div id="menu">
+            <div id="makeTable" onclick="createTable()">make table</div>
+            <input type="range" name="range" id="range" min="2" max="10" value="5">
+        </div>
+        <div id="container">
+
+        </div>
+    </form>
+</body>
+<script>
+
+    function delay(time) {
+        return new Promise(resolve => setTimeout(resolve, time));
+    }
+
+    function createTable() {
+
+        var chosenElementIdString = "";
+
+        function changeColor(row, column) {
+            var id = (String(row) + String(column))
+            console.log("ID:", id)
+            delay(1000).then(() => document.getElementById(String(id)).style.backgroundColor = "green")
+        }
+
+        var range = parseInt(document.getElementById("range").value) || 0
+
+        //tablica dwuwymiarowa
+        var tablica = []
+
+        for (var i = 0; i < range; i++) {
+            tablica[i] = []
+        }
+
+        for (var i = 0; i < range; i++) {
+            for (var j = 0; j < range; j++) {
+                tablica[i][j] = i + ', ' + j;
+            }
+        }
+
+        //generowanie divów
+        document.getElementById("container").innerHTML = ""
+        for (var i = 0; i < range; i++) {
+
+            for (var j = 0; j < range; j++) {
+                document.getElementById("container").innerHTML += `<div class="kwadrat ` + i + j + `" id="` + i + j + `"></div>`
+            }
+
+            document.getElementById("container").innerHTML += "<br>"
+        }
+        document.getElementById("container").style.width = "fit-content"
+
+        const container = document.querySelector("#container")
+
+        container.addEventListener("click", function (e) {
+
+            if (e.target.classList.contains('kwadrat')) {
+                chosenElementIdString = e.target.classList[1]
+
+                var data = JSON.stringify({
+                    range: range,
+                    chosenElementIdString: chosenElementIdString
+                })
+
+                const options = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: data
+                };
+
+                fetch("/handleForm", options)
+                    .then(response => response.json())
+                    .then(response => changeColor(response.row, response.column))
+                    .catch(error => console.log(error))
+            }
+        })
+
+    }
+</script>
+
+</html>

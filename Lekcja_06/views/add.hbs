@@ -1,0 +1,51 @@
+<p class="display-1 p-5">add car page</p>
+
+<form action="/handleForm" method="GET" class="d-flex flex-column ps-5">
+    <div class="pb-3">
+        <input class="form-check-input" type="checkbox" value="ubezpieczony" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+            Ubezpieczony
+        </label>
+    </div>
+    <div class="pb-3">
+        <input class="form-check-input" type="checkbox" value="benzyna" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+            Benzyna
+        </label>
+    </div>
+    <div class="pb-3">
+        <input class="form-check-input" type="checkbox" value="uszkodzony" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+            Uszkodzony
+        </label>
+    </div>
+    <div class="pb-3">
+        <input class="form-check-input" type="checkbox" value="4x4" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+            napęd 4x4
+        </label>
+    </div>
+    <div>
+        <button onclick="dodaj()" type="button" class="btn btn-outline-dark btn-lg">add</button>
+    </div>
+</form>
+<script>
+
+    function dodaj() {
+        console.log("kliknieto")
+        var data = []
+
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: data
+        };
+
+        fetch("/handleForm", options)
+            .then(response => response.json()) // konwersja na obiekt json, jeśli konieczne
+            .then(data => alert(JSON.stringify(data, null, 5))) // sformatowane z wcięciami dane odpowiedzi z serwera
+            .catch(error => console.log(error));
+    }
+</script>

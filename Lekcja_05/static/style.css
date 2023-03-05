@@ -1,0 +1,18 @@
+h3 {
+    color: blue;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: rgb(226, 226, 226);
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 200px;
+    font-size: 30px;
+    color: gray;
+    text-align: center;
+    width: 100%;
+    background-color: antiquewhite;
+}

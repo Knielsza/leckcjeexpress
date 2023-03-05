@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lekcja 3</title>
+    <style>
+        #secondRange {
+            width: 260px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/handleForm" method="POST">
+        <h1 style="color: blue; text-decoration: underline;">04 - fetch, ranges</h1>
+        <input type="range" name="firstRange" id="firstRange" onchange="fecz()"><br><br>
+        <input type="range" name="secondRange" id="secondRange">
+    </form>
+</body>
+<script>
+    function fecz() {
+
+        var firstRange = parseInt(document.getElementById("firstRange").value) || 0
+
+        document.getElementById("secondRange").value = document.getElementById("firstRange").value
+
+        var data = JSON.stringify({
+            firstRange: firstRange
+        })
+
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: data
+        };
+
+        fetch("/handleForm", options)
+            .then(response => response.json()) // konwersja na obiekt json, jeśli konieczne
+            .then(data => console(JSON.stringify(data, null, 5))) // sformatowane z wcięciami dane odpowiedzi z serwera
+            .catch(error => console.log(error))
+
+    }
+
+
+</script>
+
+</html>

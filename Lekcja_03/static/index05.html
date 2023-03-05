@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lekcja 3</title>
+    <style>
+        .kwadrat {
+            width: 200px;
+            height: 200px;
+            border: 1px solid rgba(0, 0, 0, 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="color: blue; text-decoration: underline;">05 - colors (ranges), fetch</h1>
+    <form action="/handleForm" method="POST">
+        <p>R: <input type="range" name="red" id="red" min="0" max="255" onchange="fecz()"></p>
+        <p>G: <input type="range" name="green" id="green" min="0" max="255" onchange="fecz()"></p>
+        <p>B: <input type="range" name="blue" id="blue" min="0" max="255" onchange="fecz()"></p>
+        <p>A: <input type="range" name="aaaa" id="aaaa" min="0" max="100" onchange="fecz()"></p>
+        <div class="kwadrat" id="kwadrat"></div>
+    </form>
+</body>
+<script>
+    function fecz() {
+
+        var Red = parseInt(document.getElementById("red").value) || 0
+        var Green = parseInt(document.getElementById("green").value) || 0
+        var Blue = parseInt(document.getElementById("blue").value) || 0
+        var AAAA = parseInt(document.getElementById("aaaa").value) || 0
+
+        console.log(Red, Green, Blue, AAAA)
+
+        var data = JSON.stringify({
+            Red: Red,
+            Green: Green,
+            Blue: Blue,
+            AAAA: AAAA
+        })
+
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: data
+        };
+
+        var color = []
+        
+        fetch("/handleForm", options)
+            .then(response => response.json())
+            .then(data1 => color = data1)
+            .then(data1 => changeColor())
+            .catch(error => console.log(error))
+        
+        function changeColor() {
+            console.log(color.bgcolor)
+            document.getElementById("kwadrat").classList.remove("kwadrat")
+            document.getElementById("kwadrat").innerHTML = `<div class="kwadrat" style="
+                background-color:` + String(color.bgcolor) + `;">
+                </div>`
+        }
+    }
+</script>
+
+</html>

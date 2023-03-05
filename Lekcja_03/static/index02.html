@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lekcja 3</title>
+    <style>
+        .kolo {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            color: white;
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="/handleForm" method="POST">
+        <input type="number" name="firstNumber" id="firstNumber">
+        <input type="number" name="secondNumber" id="secondNumber">
+        <select name="dzialanie" id="dzialanie">
+            <option value="suma">suma</option>
+            <option value="roznica">różnica</option>
+            <option value="iloczyn">iloczyn</option>
+            <option value="iloraz">iloraz</option>
+            <option value="wszystkie_dzialania">wszystkie dzialania</option>
+        </select>
+        <div id="data" class="kolo" onclick="fecz()">
+            <p>klik</p>
+        </div>
+    </form>
+</body>
+<script>
+    function fecz() {
+
+        var firstNumber = document.getElementById("firstNumber").value
+        var secondNumber = document.getElementById("secondNumber").value
+        var dzialanie = document.getElementById("dzialanie").value
+
+        var data = JSON.stringify({
+            firstNumber: firstNumber,
+            secondNumber:secondNumber,
+            dzialanie: dzialanie
+        })
+
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: data
+        };
+
+        fetch("/handleForm", options)
+            .then(response => response.json()) // konwersja na obiekt json, jeśli konieczne
+            .then(data => alert(JSON.stringify(data, null, 5))) // sformatowane z wcięciami dane odpowiedzi z serwera
+            .catch(error => console.log(error))
+    }
+
+</script>
+
+</html>

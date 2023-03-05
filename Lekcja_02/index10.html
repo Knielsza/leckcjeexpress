@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lekcja 2</title>
+    <script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="react-app"></div>
+    <script type="text/babel">
+        var data = [
+            {
+                id: 1,
+                quantity: 1,
+                name: "masło"
+            },
+            {
+                id: 2,
+                quantity: 6,
+                name: "mleko"
+            },
+            {
+                id: 3,
+                quantity: 2,
+                name: "chleb"
+            },]
+
+        class List extends React.Component {
+            render() {
+                return (
+                    <div>
+                        <ListItem quantity={data[0].quantity} name={data[0].name} />
+                        <ListItem quantity={data[1].quantity} name={data[1].name} />
+                        <ListItem quantity={data[2].quantity} name={data[2].name} />
+                    </div>
+
+                );
+            }
+        }
+        class ListItem extends React.Component {
+            render() {
+                console.log(this.props)
+                return (
+                    <div>
+                        {this.props.quantity} x {this.props.name}
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <List />,
+            document.getElementById('react-app')
+        );
+
+    </script>
+</body>
+
+</html>
